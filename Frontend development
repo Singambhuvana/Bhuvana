@@ -1,0 +1,222 @@
+
+✈️ FlightFinder Project
+
+🎨 Frontend Development – Complete Guide
+
+
+---
+
+🎯 1. Objective
+
+The frontend provides the user interface where users can:
+
+Search for flights
+
+View flight listings
+
+Book flights
+
+Enter payment details
+
+View confirmation messages
+
+
+
+---
+
+🛠️ 2. Tools and Technologies
+
+Technology	Purpose
+
+HTML	Structure and layout
+CSS	Styling and responsiveness
+JavaScript	Dynamic actions and API calls
+Fetch API	Communicate with backend
+
+
+
+---
+
+📁 3. Suggested Folder Structure
+
+client/
+├── index.html         # Home page
+├── styles.css         # Page styles
+└── script.js          # JavaScript logic
+
+
+---
+
+🧱 4. HTML – index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FlightFinder</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <h1>✈️ FlightFinder</h1>
+
+  <div class="search-box">
+    <input type="text" id="source" placeholder="From" />
+    <input type="text" id="destination" placeholder="To" />
+    <button onclick="searchFlights()">Search Flights</button>
+  </div>
+
+  <div id="flights-list"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+---
+
+🎨 5. CSS – styles.css
+
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: #f1f5f9;
+  text-align: center;
+}
+
+h1 {
+  color: #1e293b;
+}
+
+.search-box input {
+  padding: 8px;
+  margin: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button {
+  padding: 8px 16px;
+  background-color: #0284c7;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.card {
+  background: white;
+  border-radius: 10px;
+  margin: 10px auto;
+  padding: 15px;
+  width: 300px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+
+---
+
+⚙️ 6. JavaScript – script.js
+
+function searchFlights() {
+  const source = document.getElementById('source').value;
+  const destination = document.getElementById('destination').value;
+
+  fetch(`http://localhost:3000/api/flights?source=${source}&destination=${destination}`)
+    .then(res => res.json())
+    .then(data => displayFlights(data))
+    .catch(err => alert('Error fetching flights'));
+}
+
+function displayFlights(flights) {
+  const container = document.getElementById('flights-list');
+  container.innerHTML = '';
+
+  if (flights.length === 0) {
+    container.innerHTML = '<p>No flights found.</p>';
+    return;
+  }
+
+  flights.forEach(flight => {
+    const div = document.createElement('div');
+    div.className = 'card';
+    div.innerHTML = `
+      <h3>${flight.airline}</h3>
+      <p>${flight.source} ➡️ ${flight.destination}</p>
+      <p>${flight.departure_time} - ${flight.arrival_time}</p>
+      <p>₹${flight.price}</p>
+      <button onclick="bookFlight(${flight.id})">Book Now</button>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function bookFlight(flightId) {
+  const name = prompt("Enter your name:");
+  if (!name) return;
+
+  fetch('http://localhost:3000/api/bookings', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ user_name: name, flight_id: flightId })
+  })
+  .then(res => res.json())
+  .then(data => {
+    alert("Flight booked successfully!\nBooking ID: " + data.id);
+  })
+  .catch(err => alert('Booking failed'));
+}
+
+
+---
+
+🧪 7. Testing the Frontend
+
+Feature	How to Test
+
+Flight search	Fill "From" & "To", click search
+Book button	Click "Book Now" on a flight card
+Network check	Inspect > Network (verify requests)
+Console log	Inspect > Console for debugging
+
+
+
+---
+
+🌐 8. Connecting to Backend API
+
+Make sure backend server is running on http://localhost:3000
+
+Use the correct endpoint path:
+
+GET /api/flights
+
+POST /api/bookings
+
+
+For deployment, change URLs to deployed backend (e.g., Railway)
+
+
+
+---
+
+🧠 9. Best Practices
+
+Validate inputs before sending API requests
+
+Show loading spinners for large data
+
+Separate logic in different JS files if growing
+
+Use fetch().catch() to handle failed requests
+
+Use localStorage to store temporary user/session data if needed
+
+🚀 10. Optional Enhancements
+
+Feature	Description
+
+Pagination	Show 5–10 flights per page
+Filter by airline/price	Add dropdown to sort/filter results
+Booking summary modal	Show ticket summary before confirmation
+Light/dark theme toggle	Add switch using CSS + JS
+
