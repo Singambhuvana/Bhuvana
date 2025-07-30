@@ -35,3 +35,39 @@ public class FlightController {
         return flightRepo.save(flight);
     }
 }
+🐍 Python Version – Flask
+
+✅ 1. Basic Flask Setup with Flights
+
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+flights = [
+    {
+        "id": 1,
+        "airline": "Air India",
+        "source": "Delhi",
+        "destination": "Mumbai",
+        "departure": "09:00",
+        "arrival": "11:00",
+        "price": 4500
+    }
+]
+
+@app.route('/api/flights', methods=['GET'])
+def get_flights():
+    source = request.args.get('source')
+    destination = request.args.get('destination')
+    results = [f for f in flights if f["source"] == source and f["destination"] == destination]
+    return jsonify(results)
+
+@app.route('/api/flights', methods=['POST'])
+def add_flight():
+    data = request.json
+    data["id"] = len(flights) + 1
+    flights.append(data)
+    return jsonify({"message": "Flight added", "flight": data}), 201
+
+if __name__ == '__main__':
+    app.run(debug=True)
