@@ -1,0 +1,181 @@
+✈️ FlightFinder Project
+
+🔄 Application Flow – Complete Functional Walkthrough
+
+
+---
+
+🧭 1. What is Application Flow?
+
+The application flow defines the user’s journey, data processing steps, and interaction between the frontend, backend, and database components. It ensures that all modules of the app work together seamlessly to complete tasks such as searching, booking, and confirming a flight.
+
+
+---
+
+👤 2. User Journey Flow (Detailed Steps)
+
+🟢 Step 1: User Lands on Homepage
+
+Interface: index.html
+
+User sees a search bar with:
+
+From (source city)
+
+To (destination city)
+
+Departure date
+
+
+Clicks "Search Flights" button
+
+
+🟢 Step 2: Search Request Sent to Server
+
+JS sends GET request like:
+
+/api/flights?from=Delhi&to=Mumbai&date=2025-08-01
+
+Backend (Express) fetches data from the database
+
+
+🟢 Step 3: Display Available Flights
+
+Server responds with a JSON list
+
+JS reads it and creates dynamic cards like:
+
+Airline: IndiGo
+
+Departure: 6:00 AM
+
+Arrival: 8:00 AM
+
+Price: ₹4500
+
+[Book Now]
+
+
+
+🟢 Step 4: Flight Booking Initiated
+
+Clicking "Book Now" opens a Booking Form
+
+Form fields:
+
+Name, Email, Phone
+
+Flight ID (auto-filled)
+
+
+On submission, frontend sends a POST request to:
+
+/api/bookings
+
+
+🟢 Step 5: Server Creates Booking
+
+Backend validates input
+
+Stores booking info in bookings table
+
+Sends response: Booking ID: BKG12345
+
+
+🟢 Step 6: Payment Page Opens
+
+User selects payment method: Card, UPI, NetBanking
+
+Fills payment form → Sends POST to:
+
+/api/payment
+
+
+🟢 Step 7: Backend Validates Payment
+
+Stores record in payments table
+
+Links to the booking using booking_id
+
+Returns response: Payment successful!
+
+
+🟢 Step 8: Confirmation Page
+
+Frontend displays ticket details and status
+
+Option: Download Ticket / View My Bookings
+
+
+
+---
+
+🛠️ 3. Backend Logic Flow (Behind the Scenes)
+
+Step	Backend Action	DB Table Used
+
+Search Flights	Query by route/date	flights
+Book Flight	Insert booking	bookings
+Payment	Insert payment record	payments
+View Booking	Join bookings & flights	bookings, flights
+
+
+
+---
+
+📬 4. Data Flow Diagram (Logical View)
+
+User → [Frontend] → [API Call]
+     → [Express Server] → [Database Query]
+     ← [Data Returned] ← [Backend Logic]
+     ← [Frontend Displays Results]
+
+
+---
+
+💡 5. API Endpoints Summary
+
+Method	Route	Function
+
+GET	/api/flights	Get all flights by criteria
+POST	/api/bookings	Create a new booking
+POST	/api/payment	Record and verify payment
+GET	/api/bookings/:id	View user bookings
+
+
+
+---
+
+📱 6. UI-to-Server Interaction Map
+
+Page/Action	Triggered Request	Expected Response
+
+Home > Search	GET /api/flights	List of flight JSON objects
+Flight > Book Now	POST /api/bookings	Booking ID & confirmation
+Bookings > Pay Now	POST /api/payment	Success message
+My Bookings	GET /api/bookings/:uid	Booking history
+
+
+
+---
+
+🎯 7. Future Scope in Flow
+
+✅ User Authentication Flow (Login, Register, JWT)
+
+✅ Real-time flight updates (with sockets or cron jobs)
+
+✅ Booking cancellation logic
+
+✅ PDF ticket download (with jsPDF)
+
+✅ Email confirmations (Nodemailer)
+
+
+
+---
+
+📌 Example: Real Scenario Summary
+
+> 👩 A user named Bhuvana opens the app, searches for flights from Hyderabad to Bangalore, books an IndiGo flight, pays via UPI, and receives a ticket on screen with the option to download or email it.
+
