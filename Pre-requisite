@@ -1,0 +1,129 @@
+🧰 Pre-requisites – FlightFinder Project (Detailed)
+
+
+---
+
+📌 1. Programming Knowledge
+
+✅ Frontend:
+
+HTML5: Basic structure of web pages
+
+CSS3: Styling elements
+
+JavaScript (ES6+): DOM manipulation, fetch API
+
+
+✅ Backend (choose based on your project stack):
+
+Node.js (Express.js) or
+
+Python (Flask / Django) or
+
+Java (Spring Boot)
+
+
+✅ Database:
+
+Understanding of relational databases
+
+Basic SQL queries: SELECT, INSERT, JOIN, etc.
+
+
+
+
+---
+
+📌 2. Tools & IDEs
+
+Visual Studio Code (preferred)
+
+Database Tool: phpMyAdmin / MySQL Workbench / pgAdmin
+
+Postman: To test backend APIs
+
+Git & GitHub: For version control
+
+
+
+---
+
+📌 3. Software to Install
+
+Node.js (with npm)
+or
+
+Python 3.x with pip
+or
+
+Java JDK (if using Spring Boot)
+
+Database Server (e.g., MySQL / PostgreSQL)
+
+Git client (optional: GitHub Desktop)
+
+
+
+---
+
+📌 4. Libraries / Packages (Node.js example)
+
+If using Node.js, install:
+
+Express
+
+Body-parser
+
+Cors
+
+MySQL or Sequelize (ORM)
+
+
+Use command:
+
+npm install express body-parser cors mysql
+
+
+---
+
+📌 5. Web Technologies (Client-Side)
+
+Basic knowledge of:
+
+Fetch API / Axios
+
+JSON
+
+Form handling
+
+DOM manipulation
+
+
+
+
+---
+
+📌 6. Optional (But Helpful)
+
+Deployment tools:
+
+Railway / Render / Vercel / Heroku
+
+
+Basic idea of MVC (Model-View-Controller) architecture
+
+Awareness of API security (tokens, headers)
+
+
+
+---
+
+📌 7. Soft Skills
+
+Time management
+
+Logical thinking
+
+Debugging & error handling
+
+Documentation skills
