@@ -1,0 +1,214 @@
+✈️ FlightFinder Project
+
+⚙️ Project Setup & Configuration
+
+
+---
+
+🧾 1. Objective
+
+This section provides a step-by-step guide to setting up and configuring the FlightFinder project on your local machine. It includes environment setup, project structure, installation of dependencies, and configuration of tools and databases.
+
+
+---
+
+🔧 2. Setup Overview
+
+Component	Tech Used
+
+Frontend	HTML, CSS, JavaScript
+Backend	Node.js / Flask / Spring Boot
+Database	MySQL / PostgreSQL
+Tools	VS Code, Postman, Git
+Deployment	Railway / Render / Vercel
+
+
+
+---
+
+🚀 3. Node.js Setup (Express)
+
+🖥️ Prerequisites
+
+Install Node.js
+
+Install MySQL and create a flightfinder database
+
+
+📁 Folder Setup
+
+mkdir flightfinder
+cd flightfinder
+npm init -y
+npm install express mysql cors dotenv body-parser
+
+📄 Create File: app.js
+
+const express = require('express');
+const cors = require('cors');
+const app = express();
+require('dotenv').config();
+
+app.use(cors());
+app.use(express.json());
+
+app.get('/', (req, res) => {
+  res.send('FlightFinder Backend Running');
+});
+
+app.listen(process.env.PORT || 3000, () => {
+  console.log('Server is running');
+});
+
+📄 Create File: .env
+
+PORT=3000
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=yourpassword
+DB_NAME=flightfinder
+
+
+---
+
+🐍 4. Python Setup (Flask)
+
+🖥️ Prerequisites
+
+Install Python 3.x
+
+Install MySQL
+
+Install Flask
+
+
+pip install flask flask-mysqldb flask-cors
+
+📄 Create File: app.py
+
+from flask import Flask, jsonify
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app)
+
+@app.route('/')
+def home():
+    return "FlightFinder Backend Running"
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+---
+
+☕ 5. Java Setup (Spring Boot)
+
+🖥️ Prerequisites
+
+Install Java JDK 17 or above
+
+Install Spring Boot via Spring Initializr
+
+Select dependencies: Spring Web, Spring Data JPA, MySQL Driver
+
+
+📄 application.properties
+
+server.port=8080
+spring.datasource.url=jdbc:mysql://localhost:3306/flightfinder
+spring.datasource.username=root
+spring.datasource.password=yourpassword
+spring.jpa.hibernate.ddl-auto=update
+
+
+---
+
+🗃️ 6. MySQL Database Setup
+
+✅ SQL to Create Tables
+
+CREATE DATABASE flightfinder;
+
+USE flightfinder;
+
+CREATE TABLE flights (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  airline VARCHAR(50),
+  source VARCHAR(50),
+  destination VARCHAR(50),
+  departure_time VARCHAR(10),
+  arrival_time VARCHAR(10),
+  price DECIMAL(10,2)
+);
+
+CREATE TABLE bookings (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_name VARCHAR(100),
+  flight_id INT,
+  booking_date DATE,
+  FOREIGN KEY (flight_id) REFERENCES flights(id)
+);
+
+CREATE TABLE payments (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  booking_id INT,
+  amount DECIMAL(10,2),
+  payment_method VARCHAR(50),
+  payment_date DATE,
+  FOREIGN KEY (booking_id) REFERENCES bookings(id)
+);
+
+
+---
+
+🧪 7. Testing Your Setup
+
+Use Postman to test endpoints like:
+
+GET /api/flights
+
+POST /api/bookings
+
+POST /api/payment
+
+
+Use console.log() or print() for debugging
+
+Check MySQL with SELECT * FROM flights; to verify data
+
+
+
+---
+
+🛠️ 8. Common Configuration Files
+
+File	Purpose
+
+.env	Holds sensitive credentials
+package.json	Node project metadata and scripts
+app.py / app.js / FlightFinderApplication.java	Main entry point
+application.properties	Spring Boot DB config
+
+
+
+---
+
+☁️ 9. Deployment Notes (Optional)
+
+Use Render or Railway for backend deployment
+
+Use Vercel or Netlify for frontend
+
+Add .env variables in deployment dashboard
+
+✅ 10. Final Setup Checklist
+
+Task	Status
+
+Install tools (Node/Python/Java)	✅
+Set up project folders	✅
+Configure .env and DB	✅
+Create tables and seed data	✅
+Start server and test API	✅
+Frontend fetches data properly	✅
