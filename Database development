@@ -1,0 +1,175 @@
+✈️ FlightFinder Project
+
+🗃️ Database Development – Complete Guide
+
+
+---
+
+🎯 1. Objective
+
+The database is the backbone of the FlightFinder system, storing all essential information such as:
+
+Available flights
+
+Passenger bookings
+
+Payment history
+
+
+A relational database like MySQL or PostgreSQL is used to maintain data integrity and enforce logical relationships between tables.
+
+
+---
+
+🧩 2. Key Tables in the Project
+
+Table Name	Description
+
+flights	Stores flight information
+bookings	Stores user booking details
+payments	Stores payment details per booking
+
+
+
+---
+
+🧱 3. Database Schema Design (ERD Overview)
+
+Entities & Relationships:
+
+[Flight] ←── (Many) ─── [Booking] ←── (One) ─── [Payment]
+
+One Flight can be booked in many Bookings
+
+One Booking has one Payment
+
+
+
+---
+
+📘 4. Entity Relationship Diagram (ER Diagram)
+
++-----------------+        +----------------+        +----------------+
+|    FLIGHTS      |        |   BOOKINGS     |        |    PAYMENTS    |
++-----------------+        +----------------+        +----------------+
+| id (PK)         |<───┐   | id (PK)        |<───┐   | id (PK)         |
+| airline         |    └──▶| user_name      |    └──▶| booking_id (FK) |
+| source          |        | flight_id (FK) |        | amount          |
+| destination     |        | booking_date   |        | method          |
+| departure_time  |        +----------------+        | payment_date    |
+| arrival_time    |                                 +----------------+
+| price           |
++-----------------+
+
+
+---
+
+🧾 5. SQL Commands to Create Tables
+
+✅ 1. Create Database
+
+CREATE DATABASE flightfinder;
+USE flightfinder;
+
+✅ 2. Create flights Table
+
+CREATE TABLE flights (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  airline VARCHAR(50),
+  source VARCHAR(50),
+  destination VARCHAR(50),
+  departure_time VARCHAR(10),
+  arrival_time VARCHAR(10),
+  price DECIMAL(10,2)
+);
+
+✅ 3. Create bookings Table
+
+CREATE TABLE bookings (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_name VARCHAR(100),
+  flight_id INT,
+  booking_date DATE,
+  FOREIGN KEY (flight_id) REFERENCES flights(id)
+);
+
+✅ 4. Create payments Table
+
+CREATE TABLE payments (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  booking_id INT,
+  amount DECIMAL(10,2),
+  method VARCHAR(50),
+  payment_date DATE,
+  FOREIGN KEY (booking_id) REFERENCES bookings(id)
+);
+
+
+---
+
+📊 6. Sample Data to Insert (Testing)
+
+INSERT INTO flights (airline, source, destination, departure_time, arrival_time, price)
+VALUES 
+('IndiGo', 'Hyderabad', 'Delhi', '08:00', '10:00', 4500),
+('Air India', 'Mumbai', 'Chennai', '14:00', '16:30', 5500),
+('SpiceJet', 'Bangalore', 'Kolkata', '06:45', '09:15', 4200);
+
+
+---
+
+🧪 7. Sample Queries for Testing
+
+🔍 Get all flights from Hyderabad to Delhi
+
+SELECT * FROM flights WHERE source='Hyderabad' AND destination='Delhi';
+
+🧾 Book a flight (ID = 1)
+
+INSERT INTO bookings (user_name, flight_id, booking_date)
+VALUES ('Bhuvana Reddy', 1, CURDATE());
+
+💳 Add payment for booking
+
+INSERT INTO payments (booking_id, amount, method, payment_date)
+VALUES (1, 4500, 'UPI', CURDATE());
+
+
+---
+
+📌 8. Best Practices
+
+Always use FOREIGN KEY constraints for referential integrity
+
+Use NOT NULL on essential columns
+
+Use DECIMAL for price/amount to avoid float rounding issues
+
+Back up database using mysqldump
+
+Secure .env file with DB credentials
+
+
+
+---
+
+💡 9. Optional Enhancements
+
+Feature	Implementation Idea
+
+User login system	Add users table + auth
+Booking status tracking	Add status column in bookings
+Flight availability	Add seats_available in flights
+Ticket cancellation	Add soft-delete flag
+
+
+
+---
+
+✅ 10. Final Notes
+
+Keep SQL scripts in a folder like database/schema.sql
+
+Maintain version control of database changes if possible
+
+Test queries in MySQL Workbench or phpMyAdmin
