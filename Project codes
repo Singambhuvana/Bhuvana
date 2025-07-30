@@ -1,0 +1,37 @@
+flight entity (java)
+@Entity
+public class Flight {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String airline;
+    private String source;
+    private String destination;
+    private String departureTime;
+    private String arrivalTime;
+    private double price;
+    // getters & setters
+}
+2.Flight Repository 
+@Repository
+public interface FlightRepository extends JpaRepository<Flight, Long> {
+    List<Flight> findBySourceAndDestination(String source, String destination);
+}
+ 3.Flight controller 
+@RestController
+@RequestMapping("/api/flights")
+public class FlightController {
+
+    @Autowired
+    private FlightRepository flightRepo;
+
+    @GetMapping
+    public List<Flight> getFlights(@RequestParam String source, @RequestParam String destination) {
+        return flightRepo.findBySourceAndDestination(source, destination);
+    }
+
+    @PostMapping
+    public Flight addFlight(@RequestBody Flight flight) {
+        return flightRepo.save(flight);
+    }
+}
