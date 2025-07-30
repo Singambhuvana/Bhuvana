@@ -1,0 +1,78 @@
+✈️ FlightFinder Project
+
+🧱 Project Structure Overview
+
+
+---
+
+📁 Folder and File Structure (Node.js Example)
+
+FlightFinder/
+├── client/                  # Frontend code
+│   ├── index.html
+│   ├── styles.css
+│   └── script.js
+│
+├── server/                  # Backend code
+│   ├── controllers/
+│   │   └── flightController.js
+│   ├── models/
+│   │   └── flightModel.js
+│   ├── routes/
+│   │   └── flightRoutes.js
+│   ├── config/
+│   │   └── db.js
+│   └── app.js               # Main server file
+│
+├── .env                     # Environment variables
+├── package.json             # Project metadata and dependencies
+└── README.md                # Project documentation
+
+
+---
+
+🧩 Components Breakdown
+
+🔹 Frontend (client/)
+
+index.html: Main HTML page to interact with users
+
+styles.css: Styling and layout
+
+script.js: Logic to fetch and display flight data
+
+
+🔹 Backend (server/)
+
+controllers/: Handles logic for processing requests
+
+routes/: Manages API endpoints (e.g., /api/flights)
+
+models/: Contains database schema definitions
+
+config/: Stores DB connection settings
+
+app.js: Initializes the server and connects all parts
+
+
+🔹 Database
+
+flight table: Stores flight details
+
+user table: Stores user info
+
+booking table: Stores booking records
+
+payment table: Tracks transactions
+
+
+
+---
+
+🌐 Example API Endpoints
+
+Method	Endpoint	Description
+
+GET	/api/flights	Fetch all flights
+POST	/api/book	Book a flight
+POST	/api/payment	Process payment
