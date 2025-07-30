@@ -1,0 +1,174 @@
+✈️ ER Diagram - FlightFinder Project
+
+🔷 Main Entities and Relationships:
+
+1. User
+
+user_id (PK)
+
+name
+
+email
+
+password
+
+phone_number
+
+
+
+2. Flight
+
+flight_id (PK)
+
+airline_name
+
+source
+
+destination
+
+departure_time
+
+arrival_time
+
+price
+
+
+
+3. Booking
+
+booking_id (PK)
+
+user_id (FK)
+
+flight_id (FK)
+
+booking_date
+
+status
+
+
+
+4. Payment
+
+payment_id (PK)
+
+booking_id (FK)
+
+payment_date
+
+amount
+
+payment_method
+
+payment_status
+
+
+
+
+
+---
+
+🔄 Relationships:
+
+A User can make multiple Bookings
+
+A Booking is for one Flight
+
+A Booking has one Payment
+
+A Flight can have many Bookings
+
+
+
+---
+
+📄 You Can Copy This Text into a File:
+
+Save it as ER_Diagram.txt using any notes or file app.
+✈️ ER Diagram - FlightFinder Project
+
+🔷 Main Entities and Relationships:
+
+1. User
+
+user_id (PK)
+
+name
+
+email
+
+password
+
+phone_number
+
+
+
+2. Flight
+
+flight_id (PK)
+
+airline_name
+
+source
+
+destination
+
+departure_time
+
+arrival_time
+
+price
+
+
+
+3. Booking
+
+booking_id (PK)
+
+user_id (FK)
+
+flight_id (FK)
+
+booking_date
+
+status
+
+
+
+4. Payment
+
+payment_id (PK)
+
+booking_id (FK)
+
+payment_date
+
+amount
+
+payment_method
+
+payment_status
+
+
+
+
+
+---
+
+🔄 Relationships:
+
+A User can make multiple Bookings
+
+A Booking is for one Flight
+
+A Booking has one Payment
+
+A Flight can have many Bookings
+
+
+
+---
+
+📄 You Can Copy This Text into a File:
+
+Save it as ER_Diagram.txt using any notes or file app.
